@@ -1,5 +1,9 @@
 # Employee Management System
 
+[![Node.js](https://img.shields.io/badge/Node.js-v14.17.3-green.svg)](https://nodejs.org/)
+[![Inquirer](https://img.shields.io/badge/Inquirer-v8.2.0-blue.svg)](https://www.npmjs.com/package/inquirer)
+[![mysql2](https://img.shields.io/badge/mysql2-v2.3.0-blue.svg)](https://www.npmjs.com/package/mysql2) [![MySQL](https://img.shields.io/badge/MySQL-v8.0-blue.svg)](https://www.mysql.com/)
+[![MySQL Workbench](https://img.shields.io/badge/MySQL%20Workbench-v8.0-blue.svg)](https://www.mysql.com/products/workbench/)
 
 ## Description
 
@@ -40,6 +44,7 @@ To use this Employee Management System, you need to have [Node.js](https://nodej
 
    ```shell
    npm install
+   node index.js
     ```
 
 ## Database Setup
@@ -68,12 +73,6 @@ https://watch.screencastify.com/v/RIM2AXbeyDDVdLgqpI81
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
 ## Resources and Technologies Used 
-
-1. [![Node.js](https://img.shields.io/badge/Node.js-v14.17.3-green.svg)](https://nodejs.org/)
-2. [![Inquirer](https://img.shields.io/badge/Inquirer-v8.2.0-blue.svg)](https://www.npmjs.com/package/inquirer)
-3. [![mysql2](https://img.shields.io/badge/mysql2-v2.3.0-blue.svg)](https://www.npmjs.com/package/mysql2)
-4. [![MySQL](https://img.shields.io/badge/MySQL-v8.0-blue.svg)](https://www.mysql.com/)
-5. [![MySQL Workbench](https://img.shields.io/badge/MySQL%20Workbench-v8.0-blue.svg)](https://www.mysql.com/products/workbench/)
 
 
 - [Node.js](https://nodejs.org/en/) 
