@@ -5,9 +5,9 @@ const db = mysql.createConnection(
     {
       host: 'localhost',
       // MySQL username,
-      user: '',
+      user: 'root',
       // Add MySQL password here
-      password: '',
+      password: 'rootroot',
       database: 'employee_db'
     },
     console.log(`Connected to the employee database.`)
@@ -22,14 +22,14 @@ const db = mysql.createConnection(
         choices: [
                   "View All Employees", //done
                   "Add Employees",      //done
-                  "Update Employee Role",
+                  "Update Employee Role", //done
                   "View All Roles",     //done
                   "Add Role",           //done
                   "View All Departments", //done
                   "Add Department",     //done
-                  "Delete Department",
-                  "Delete Role",
-                  "Delete Employee",
+                  "Delete Department",  //done
+                  "Delete Role",        //done
+                  "Delete Employee",    //done
                   "Quit"                //done
                 ],
     }])
@@ -43,26 +43,28 @@ const db = mysql.createConnection(
         console.log('\n');
         console.table(response);
         console.log('\n'+ "Move up and down to reveal more choices");
-
+        startProgramm();
       });
 
       break;
+
       case "View All Roles": 
       db.promise().query("SELECT * FROM role")
       .then(function([response]) {
         console.log('\n');
         console.table(response);
         console.log('\n'+ "Move up and down to reveal more choices");
-
+        startProgramm();
       });
       break;
+
       case "View All Departments": 
       db.promise().query("SELECT * FROM department")
       .then(function([response]) {
         console.log('\n');
         console.table(response);
         console.log('\n'+ "Move up and down to reveal more choices");
-
+        startProgramm();
       });
       break;
 
@@ -87,7 +89,7 @@ const db = mysql.createConnection(
         {
           name: "managerID",
           type: "input",
-          message: "Enter employee's manager ID (0 for no manager)"
+          message: "Enter employee's manager ID"
         }
       ]);
       db.promise().query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)",[
@@ -152,67 +154,44 @@ const db = mysql.createConnection(
         });
         break;
 
-      case "Add Department":
-        console.log("Add Department selected");
-        const addDepartmentInfo = await inquirer.prompt([
-          {
-            name: "name",
-            type: "input",
-            message: "Enter department name: "
-          }
-        ]);
-        db.promise().query("INSERT INTO department (name) VALUES (?)",[
-          addDepartmentInfo.name
-        ])
-        .then(function([response]) {
-          console.log('\n Department added');
-          return db.promise().query("SELECT * FROM department");
-        })
-        .then(function([response]) {  
-          console.log('\n');
-          console.table(response);
-          console.log('\n'+ "Move up and down to reveal more choices");
-          startProgramm();
-        })
-        .catch(function(err) {
-          console.error("Error: " + err.message);
-          startProgramm();
-        });
-        break;
-      
-      case "Update Employee Role":
-        console.log("Update Employee Role selected");
-        const updateEmployeeRoleInfo = await inquirer.prompt([
-          {
-            name: "employeeID",
-            type: "input",
-            message: "Enter employee ID: "
-          },
-          {
-            name: "roleID",
-            type: "input",
-            message: "Enter role ID: "
-          }
-        ]);
-        db.promise().query("UPDATE employee SET role_id = ? WHERE id = ?",[
-          updateEmployeeRoleInfo.roleID,
-          updateEmployeeRoleInfo.employeeID
-        ])
-        .then(function([response]) {
-          console.log('\n Employee role updated');
-          return db.promise().query("SELECT * FROM employee");
-        })
-        .then(function([response]) {  
-          console.log('\n');
-          console.table(response);
-          console.log('\n'+ "Move up and down to reveal more choices");
-          startProgramm();
-        })
-        .catch(function(err) {
-          console.error("Error: " + err.message);
-          startProgramm();
-        });
-        break;
+        case "Add Department":
+          console.log("Add Department selected");
+          const addDepartmentInfo = await inquirer.prompt([
+            {
+              name: "name",
+              type: "input",
+              message: "Enter department name: "
+            }
+          ]);
+        
+          // Check if the department already exists
+          db.promise()
+            .query("SELECT id FROM department WHERE name = ?", [addDepartmentInfo.name])
+            .then(function ([results]) {
+              if (results.length > 0) {
+                console.log(`Department '${addDepartmentInfo.name}' already exists.`);
+              } else {
+                // Insert the new department into the database
+                return db.promise().query("INSERT INTO department (name) VALUES (?)", [addDepartmentInfo.name]);
+              }
+            })
+            .then(function () {
+              console.log('\nDepartment added');
+              return db.promise().query("SELECT * FROM department");
+            })
+            .then(function ([response]) {
+              console.log('\n');
+              console.table(response);
+              console.log('\n' + 'Move up and down to reveal more choices');
+              startProgramm();
+            })
+            .catch(function (err) {
+              console.error("Error: " + err.message);
+              startProgramm();
+            });
+          break;
+        
+
       case "Delete Department":
         console.log("Delete Department selected");
         const deleteDepartmentInfo = await inquirer.prompt([
@@ -240,6 +219,7 @@ const db = mysql.createConnection(
           startProgramm();
         });
         break;
+
       case "Delete Role": 
         console.log("Delete Role selected");
         const deleteRoleInfo = await inquirer.prompt([
@@ -267,10 +247,13 @@ const db = mysql.createConnection(
           startProgramm();
         });
         break;
+
       case "Quit": 
-        console.log('Exiting the program.');
+        console.log('Exiting the program. Thank you!');
         db.end();
       break;
+
+
       case "Delete Employee":
         console.log("Delete Employee selected");
         const deleteEmployeeInfo = await inquirer.prompt([
@@ -303,9 +286,7 @@ const db = mysql.createConnection(
         console.log("Exiting");
         db.end();
       return;
-
     }
-    startProgramm();
     } catch (err) {
       console.log(err);
     }
