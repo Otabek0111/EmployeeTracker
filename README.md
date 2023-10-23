@@ -58,7 +58,7 @@ To use this Employee Management System, you need to have [Node.js](https://nodej
      host: 'localhost',
      user: 'your_username',
      password: 'your_password',
-     database: 'your_database_name',
+     database: 'employee_db',
    });
     ```
 
