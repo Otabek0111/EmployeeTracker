@@ -1,5 +1,6 @@
 # Employee Management System
 
+
 ## Description
 
 This command-line application is an Employee Management System that allows users to manage departments, roles, and employees in a company. The application provides various options, including viewing departments, roles, and employees, adding departments, roles, and employees, and updating an employee's role.
@@ -68,7 +69,14 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 ## Resources and Technologies Used 
 
-- [Node.js](https://nodejs.org/en/)
+1. [![Node.js](https://img.shields.io/badge/Node.js-v14.17.3-green.svg)](https://nodejs.org/)
+2. [![Inquirer](https://img.shields.io/badge/Inquirer-v8.2.0-blue.svg)](https://www.npmjs.com/package/inquirer)
+3. [![mysql2](https://img.shields.io/badge/mysql2-v2.3.0-blue.svg)](https://www.npmjs.com/package/mysql2)
+4. [![MySQL](https://img.shields.io/badge/MySQL-v8.0-blue.svg)](https://www.mysql.com/)
+5. [![MySQL Workbench](https://img.shields.io/badge/MySQL%20Workbench-v8.0-blue.svg)](https://www.mysql.com/products/workbench/)
+
+
+- [Node.js](https://nodejs.org/en/) 
 - [Inquirer](https://www.npmjs.com/package/inquirer)
 - [mysql2](https://www.npmjs.com/package/mysql2)
 - [MySQL](https://www.mysql.com/)
